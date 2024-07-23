@@ -15,7 +15,7 @@ st.title("Euro 2024: StatsBomb 360° Tool")
 st.markdown("*Platform providing insight into StatsBomb 360° data for every Euro 2024 match*")
 st.markdown("---")
 
-st.sidebar.image("https://raw.githubusercontent.com/AKapich/Space_Control_App/main/EURO2024.png")
+st.sidebar.image("https://raw.githubusercontent.com/AKapich/StatsBomb360_App/main/EURO2024.png")
 
 # dropdown for choosing the match
 st.sidebar.title("Select Match")
@@ -70,7 +70,7 @@ elif mode == 'Shot Freeze Frame':
 
 
 st.markdown('---')
-st.image('https://raw.githubusercontent.com/AKapich/Space_Control_App/main/sb_icon.png',
+st.image('https://raw.githubusercontent.com/AKapich/StatsBomb360_App/main/sb_icon.png',
           caption='App made by Aleks Kapich. Data powered by StatsBomb', use_column_width=True)
 
 # signature

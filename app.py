@@ -7,7 +7,7 @@ import pandas as pd
 
 st.set_page_config(
         page_title="Euro 2024: StatsBomb 360° Data Explorer",
-        # page_icon='https://raw.githubusercontent.com/AKapich/WorldCup_App/main/app/qatar_icon.ico',
+        page_icon='https://raw.githubusercontent.com/AKapich/StatsBomb360_App/main/eurologo.ico',
     )
 
 

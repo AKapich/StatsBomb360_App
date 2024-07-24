@@ -194,14 +194,14 @@ def shot_freeze_frame(shot_df, tag, home_team, away_team):
         color='white'
         marker='D'
         size=120
-        
-    plt.scatter(
-        x=shot['shot_end_location'][0],
-        y=shot['shot_end_location'][1],
-        color=color,
-        marker=marker,
-        s=size,
-        edgecolors='black'
-    )
+    if shot['shot_outcome'] in ['Blocked', 'Saved', 'Goal']:
+        plt.scatter(
+            x=shot['shot_end_location'][0],
+            y=shot['shot_end_location'][1],
+            color=color,
+            marker=marker,
+            s=size,
+            edgecolors='black'
+        )
         
     return fig

@@ -184,18 +184,16 @@ def shot_freeze_frame(shot_df, tag, home_team, away_team):
         s=400,
         edgecolors='black'
     )
-
-    if not shot['shot_outcome']=='Blocked':
-        pitch.lines(
-            xstart=shot['location'][0],
-            ystart=shot["location"][1],
-            xend=shot['shot_end_location'][0],
-            yend=shot['shot_end_location'][1],
-            ax=ax,
-            comet=True,
-            color='white'
-        )
-    else:
+    pitch.lines(
+        xstart=shot['location'][0],
+        ystart=shot["location"][1],
+        xend=shot['shot_end_location'][0],
+        yend=shot['shot_end_location'][1],
+        ax=ax,
+        comet=True,
+        color='white'
+    )
+    if shot['shot_outcome']=='Blocked':
         plt.scatter(
             x=shot['shot_end_location'][0],
             y=shot['shot_end_location'][1],

@@ -48,7 +48,7 @@ if mode == 'Timestamp Slider':
     st.pyplot(create_plot(df, event_dict, chosen_timestamp, displayed_event, voronoi, home_team, away_team))
 
 elif mode == 'Shot Freeze Frame':
-    tab1, tab2, tab3 = st.tabs(["📈 Charts", "📄 Shot Info", "🧱 Goal Build-Up"])
+    tab1, tab2 = st.tabs(["📈 Charts", "📄 Shot Info"])
     shot_info = event_df[event_df['shot_outcome'].notna()][['player', 'timestring', 'shot_outcome', 'shot_statsbomb_xg', 'shot_technique', 'shot_body_part']]
     shot_info.index = range(1, len(shot_info)+1)
 
@@ -64,9 +64,6 @@ elif mode == 'Shot Freeze Frame':
     with tab2:
         shot_info.columns = ["Player", "Timestamp", "Shot Outcome", "xG", "Technique", "Body Part"]
         st.dataframe(shot_info)
-
-    with tab3:
-        st.write("Coming soon!")
 
 
 st.markdown('---')

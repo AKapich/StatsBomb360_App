@@ -110,17 +110,7 @@ def create_plot(df, event_dict, chosen_timestamp, displayed_event, voronoi, home
         for p2 in t2:
             p2.set_clip_path(visible[0])
 
-    if row['type'] == 'Pass':
-        pitch.lines(
-            xstart=row["location"][0],
-            ystart=row["location"][1],
-            xend=row['pass_end_location'][0],
-            yend=row['pass_end_location'][1],
-            ax=ax,
-            comet=True,
-            color='white'
-        )
-    elif row['type'] == 'Carry':
+    if row['type'] == 'Carry':
         pitch.arrows(
             xstart=row["location"][0],
             ystart=row["location"][1],
@@ -130,16 +120,18 @@ def create_plot(df, event_dict, chosen_timestamp, displayed_event, voronoi, home
             color='white',
             linestyle='--'
         )
-    elif row['type'] == 'Shot':
+    elif row['type'] in ['Pass', 'Shot']:
+        type = 'pass' if row['type'] == 'Pass' else 'shot'
         pitch.lines(
             xstart=row["location"][0],
             ystart=row["location"][1],
-            xend=row['shot_end_location'][0],
-            yend=row['shot_end_location'][1],
+            xend=row[f'{type}_end_location'][0],
+            yend=row[f'{type}_end_location'][1],
             ax=ax,
             comet=True,
             color='white'
         )
+
     return fig
 
 
@@ -181,7 +173,7 @@ def shot_freeze_frame(shot_df, tag, home_team, away_team):
         y=shot['location'][1],
         color=color,
         marker='*',
-        s=400,
+        s=450,
         edgecolors='black'
     )
     pitch.lines(
@@ -193,13 +185,23 @@ def shot_freeze_frame(shot_df, tag, home_team, away_team):
         comet=True,
         color='white'
     )
-    if shot['shot_outcome']=='Blocked':
-        plt.scatter(
-            x=shot['shot_end_location'][0],
-            y=shot['shot_end_location'][1],
-            color='#ff4b4b',
-            marker='X',
-            s=200,
-            edgecolors='black')
+
+    if shot['shot_outcome'] in ['Blocked', 'Saved']:
+        color = away_color if shot['team'] == home_team else home_color
+        marker='X'
+        size=300
+    elif shot['shot_outcome'] == 'Goal':
+        color='white'
+        marker='D'
+        size=120
+        
+    plt.scatter(
+        x=shot['shot_end_location'][0],
+        y=shot['shot_end_location'][1],
+        color=color,
+        marker=marker,
+        s=size,
+        edgecolors='black'
+    )
         
     return fig

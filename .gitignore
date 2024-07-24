@@ -1,8 +1,0 @@
-__pycache__/
-
-*.py[cod]
-*.pyo
-*.pyd
-*.pdb
-
-**/__pycache__/

@@ -135,7 +135,7 @@ def create_plot(df, event_dict, chosen_timestamp, displayed_event, voronoi, home
     return fig
 
 
-def shot_freeze_frame(shot_df, tag, home_team, away_team):
+def shot_freeze_frame(shot_df, tag, home_team, away_team, keeper_cone=False):
     shot = shot_df[shot_df['tag']==tag].iloc[0]
     home_color = country_colors[home_team]
     away_color = country_colors[away_team]
@@ -160,6 +160,22 @@ def shot_freeze_frame(shot_df, tag, home_team, away_team):
             s=100,
             edgecolors='black'
         )
+
+    if keeper_cone:
+        pitch.goal_angle(shot['location'][0], shot['location'][1], alpha=0.47, color='cyan', ax=ax)
+        for player in shot['shot_freeze_frame']:
+            if player['position']['name'] == 'Goalkeeper':
+                plt.scatter(player['location'][0], player['location'][1], color='white', marker='p', s=220, edgecolors='black')
+                ax.annotate(
+                    'G',
+                    xy=(player['location'][0], player['location'][1]+0.1),
+                    c='black',
+                    va='center',
+                    ha='center',
+                    size=9,
+                    fontweight='bold',
+                )
+                break
 
     pitch.annotate(
         shot['player'],

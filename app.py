@@ -58,8 +58,9 @@ elif mode == 'Shot Freeze Frame':
         shot_df['tag'] = shot_df['player'] + ' - ' + shot_df['timestring'] + ' ( ' + shot_df['shot_outcome'] + ' )'
 
         tag = st.selectbox("Choose shot",options=shot_df['tag'].to_list())
+        keeper_cone = st.checkbox("Highlight Keeper Cone View")
 
-        st.pyplot(shot_freeze_frame(shot_df, tag, home_team, away_team))
+        st.pyplot(shot_freeze_frame(shot_df, tag, home_team, away_team, keeper_cone))
 
     with tab2:
         shot_info.columns = ["Player", "Timestamp", "Shot Outcome", "xG", "Technique", "Body Part"]
